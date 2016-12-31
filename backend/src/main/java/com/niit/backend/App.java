@@ -5,7 +5,6 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 import com.niit.backend.config.AppContextConfig;
 import com.niit.backend.dao.ProductDAO;
-import com.niit.backend.model.Product;
 
 /**
  * Hello world!
@@ -13,20 +12,10 @@ import com.niit.backend.model.Product;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-       AbstractApplicationContext context=new AnnotationConfigApplicationContext(AppContextConfig.class);
-       
- ProductDAO productDAO=(ProductDAO)context.getBean("productDAO");
-       
-       Product product=new Product();
-       product.setProductId(11);
-       product.setProductName("India");
-       product.setCategory("category");
-       product.setPrice(35000.00);
-       
-
-       
-       
-    }
+	 public static void main( String[] args )
+	    {
+	        AbstractApplicationContext context=new AnnotationConfigApplicationContext(AppContextConfig.class);
+	        
+	       
+	    }
 }

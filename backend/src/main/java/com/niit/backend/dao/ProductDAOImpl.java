@@ -12,28 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.backend.model.Product;
 
 @Repository("productDAO")
-@Transactional
 @EnableTransactionManagement
-public class ProductDAOImpl implements ProductDAO {
-	
+@Transactional
+public class ProductDAOImpl implements ProductDAO{
+
 	@Autowired
 	SessionFactory sessionFactory;
-
-	public List<Product> getAllProducts() {
-		Session session=sessionFactory.getCurrentSession();
-		List<Product> products=session.createQuery("from Product").getResultList();
-		return products;
-		}
-
-	public Product getProductById(int id) {
-		Session session=sessionFactory.getCurrentSession();
-		Product product=(Product)session.createQuery("from Product where id="+id).getSingleResult();
-		return product;
-	}
 
 	public void addProduct(Product product) {
 		Session session=sessionFactory.getCurrentSession();
 		session.persist(product);
+		
 	}
 
 	public void updateProduct(Product product) {
@@ -42,11 +31,22 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 
-	public void deleteProduct(Product product) {
+	public List<Product> listProducts() {
 		Session session=sessionFactory.getCurrentSession();
+		List<Product> products=session.createQuery("from Product").getResultList();
+		return products;
+	}
+
+	public Product getProductById(int id) {
+		Session session=sessionFactory.getCurrentSession();
+	    Product product=(Product)session.createQuery("from Product where id="+id).getSingleResult();
+		return product;
+	}
+
+	public void removeProduct(int id) {
+		Session session=sessionFactory.getCurrentSession();
+		Product product=(Product)session.createQuery("from Product where id="+id).getSingleResult();
 		session.delete(product);
 		
 	}
-
-	
 }
